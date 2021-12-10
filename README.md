@@ -1,12 +1,37 @@
 # Croblanc
-### He's coming...
 
-We will launch our testnet soon!
+CROBLANC is a DeFi Yield aggregator exclusively available on Cronos that comes on top of the most famous platforms such as VVSFinance, CronaSwap and Crodex, offering various types of pools:
 
-While you can enjoy our current testnet at https://dev.croblanc.com, we will finish the GitHub and Git Books work.
+- Stochastic yield: the emission speed of CROBLANC tokens depends on its market price, in order to keep it sustainable
+- Classic pools, offering a dual yield CROBLANC + VVS/CRONA/CRX
+- Autocompound pools, offering an auto compounding similar to Autofarm but with extra CROBLANC yield
+- Autoswap pools, offering an innovative way to farm A-tier tokens such as BTC, ETH, CRO with stablecoins deposits.
 
-Contracts ABIs, deployement addresses, and code skeletons will be published before the mainnet launch.
+CROBLANC also offers to its hodlers dividends paid in $CROBLANC that comes from a small performance fee that is charged on the generated yield. The supply is limited to 100 million tokens.
 
-For further security, the complete source code will remain private until we finish the auditing process.
+### Disclosed source code
 
-Join the pack, fellow wolves!
+CROBLANC is not entierly open-source. However, we publish the core Smart Contracts source code here.
+
+Furthermore, to keep all our users safe, Farms contracts will be entierely disclosed after we finish the auditing process.
+
+### Deployed Contracts (Cronos mainnet)
+
+| Contract | Address |
+| ----------- | ----------- |
+| CroblancToken | [`0xD3ceCBE5639D05Aed446Da11F08D495CA6bF359F`](https://cronos.crypto.org/explorer/address/0xD3ceCBE5639D05Aed446Da11F08D495CA6bF359F) |
+| CroblancTreasury | [`0xb20234c33337537111f4ab6f5EcaD400134aC143`](https://cronos.crypto.org/explorer/address/0xb20234c33337537111f4ab6f5EcaD400134aC143) |
+| CroblancTimelock | [`0x47eC5085c8D544a42Baf966ee97cC54a7503b996`](https://cronos.crypto.org/explorer/address/0x47eC5085c8D544a42Baf966ee97cC54a7503b996) |
+
+
+### Testnet
+
+A public testnet is currently running on https://dev.croblanc.com/
+
+Feel free to contribute! It helps to build a better product.
+
+### Join the community
+
+Twitter: https://twitter.com/croblancdotcom
+Telegram Community group: https://t.me/croblanc_cm
+Telegram Announcements channel: https://t.me/croblancdotcom
