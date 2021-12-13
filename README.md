@@ -22,7 +22,7 @@ Furthermore, to keep all our users safe, Farms contracts will be entierely discl
 | CroblancToken | [`0xD3ceCBE5639D05Aed446Da11F08D495CA6bF359F`](https://cronos.crypto.org/explorer/address/0xD3ceCBE5639D05Aed446Da11F08D495CA6bF359F) |
 | CroblancTreasury | [`0xb20234c33337537111f4ab6f5EcaD400134aC143`](https://cronos.crypto.org/explorer/address/0xb20234c33337537111f4ab6f5EcaD400134aC143) |
 | CroblancTimelock | [`0x47eC5085c8D544a42Baf966ee97cC54a7503b996`](https://cronos.crypto.org/explorer/address/0x47eC5085c8D544a42Baf966ee97cC54a7503b996) |
-
+| CroblancDividends | [`0x7727D82c8e9881b3D459CE0D5B87D2132A9915A4`](https://cronos.crypto.org/explorer/address/0x7727D82c8e9881b3D459CE0D5B87D2132A9915A4) |
 
 ### Testnet
 
