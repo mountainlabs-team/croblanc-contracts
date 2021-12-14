@@ -11,9 +11,9 @@ CROBLANC also offers to its hodlers dividends paid in $CROBLANC that comes from 
 
 ### Disclosed source code
 
-CROBLANC is not entierly open-source. However, we publish the core Smart Contracts source code here.
+CROBLANC is not entirely open-source. However, we publish the core Smart Contracts source code here.
 
-Furthermore, to keep all our users safe, Farms contracts will be entierely disclosed after we finish the auditing process.
+Furthermore, to keep all our users safe, Farms contracts will be entirely disclosed after we finish the auditing process.
 
 ### Deployed Contracts (Cronos mainnet)
 
