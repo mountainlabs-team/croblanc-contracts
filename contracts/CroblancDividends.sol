@@ -43,12 +43,13 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
     // Info of each user
     mapping(address => uint256) public wcroRewardDebt;
     mapping(address => uint256) public wcroAlreadyClaimedPerShare;
+    mapping(address => bool) public blacklisted;
 
     // Tokens
     address constant public wcro = address(0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23);
     address public croblanc;
     address public treasury;
-    address public routeFrom; // @todo Use an array of addresses
+    address public routeFrom;
     address public routeTo;
 
     // Calculation of rewards
@@ -82,12 +83,27 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
     }
 
     function pullDividends(address _address, uint256 _amount) external {
-        // @todo This function code will be disclosed after the external auditing process is done
+        if (totalSupply() == 0) {
+            return;
+        }
+
+        // Pull the WCROs
+        IERC20(wcro).transferFrom(_address, address(this), _amount);
+
+        // Split for every share
+        uint256 wcroPerShare = _amount.mul(1e18).div(totalSupply());
+        totalWcroPerShare = totalWcroPerShare.add(wcroPerShare);
+
+        totalWcroLifetime = totalWcroLifetime.add(_amount);
     }
 
     // View function to see pending WCRO on frontend.
     function pendingWcro(address _user) public view returns (uint256) {
-        // @todo This function code will be disclosed after the external auditing process is done
+        if (isBuybackEnabled) {
+            return totalWcroPerShare.sub(wcroAlreadyClaimedPerShare[_user]).mul(balanceOf(_user)).div(2e18);
+        } else {
+            return totalWcroPerShare.sub(wcroAlreadyClaimedPerShare[_user]).mul(balanceOf(_user)).div(1e18);
+        }
     }
 
     // Public endpoint to harvest rewards for msg.sender
@@ -103,11 +119,42 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
 
     // Harvest for a user
     function _harvestOnBehalfOf(address _user) internal {
-        // @todo This function code will be disclosed after the external auditing process is done
+        uint256 amount = pendingWcro(_user);
+
+        // If buyback is enabled, `amount` equals to 50% of the actual available wcro, half for the user, half bought back
+        if (!blacklisted[_user]) {
+            IERC20(wcro).transfer(_user, amount);
+        } else {
+            IERC20(wcro).transfer(treasury, amount);
+        }
+
+        // Buyback if needed
+        if (isBuybackEnabled) {
+            _buyback(amount);
+        }
+
+        // Save history
+        wcroAlreadyClaimedPerShare[_user] = totalWcroPerShare;
     }
 
     function deposit(uint256 _amount) public nonReentrant {
-        // @todo This function code will be disclosed after the external auditing process is done
+        // User already has LP tokens deposited
+        if (balanceOf(msg.sender) > 0) {
+            // Force a harvest first
+            harvest();
+        }
+
+        // User will deposit?
+        if (_amount > 0) {
+            // Pull his LP tokens
+            IERC20(croblanc).safeTransferFrom(msg.sender, address(this), _amount);
+            // Mint our own LP tokens
+            _mint(msg.sender, _amount);
+        }
+        // Reset user debt so he will farm the correct amount
+        wcroAlreadyClaimedPerShare[msg.sender] = totalWcroPerShare;
+
+        emit Deposit(msg.sender, _amount);
     }
 
     function depositAll() public {
@@ -115,7 +162,25 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
     }
 
     function withdraw(uint256 _amount) public nonReentrant {
-        // @todo This function code will be disclosed after the external auditing process is done
+        require(_amount > 0);
+        require(balanceOf(msg.sender) >= _amount);
+
+        // Force a harvest
+        harvest();
+
+        // User will withdraw?
+        if (_amount > 0) {
+            // Substract withdrawn amount from user shares
+            _burn(msg.sender, _amount);
+
+            // Transfer the want back to the user
+            IERC20(croblanc).safeTransfer(msg.sender, _amount);
+        }
+        
+        // Reset user debt so he will farm the correct amount
+        wcroAlreadyClaimedPerShare[msg.sender] = totalWcroPerShare;
+
+        emit Withdraw(msg.sender, _amount);
     }
 
     function withdrawAll() public {
@@ -123,12 +188,27 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
     }
 
     function _buyback(uint256 _amountWcro) internal {
-        // @todo This function code will be disclosed after the external auditing process is done
+        address[] memory route = new address[](2);
+        route[0] = routeFrom;
+        route[1] = routeTo;
+        IUniswapV2Router02(router).swapExactTokensForTokens(_amountWcro, 0, route, treasury, block.timestamp);
     }
 
     // @notice amount raises "Unused function parameter" warning. As it overrides native ERC20 code, we keep it anyway.
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal override {
-        // @todo This function code will be disclosed after the external auditing process is done
+        // In case we mint or burn
+        if (from == address(0) || to == address(0)) {
+            // Nothing to do
+            return;
+        }
+
+        // Force a harvest for both users
+        _harvestOnBehalfOf(from);
+        _harvestOnBehalfOf(to);
+
+        // Transfer the pending balances and reset users debts
+        wcroAlreadyClaimedPerShare[from] = totalWcroPerShare;
+        wcroAlreadyClaimedPerShare[to] = totalWcroPerShare;
     }
 
     // Warning! Enable buyback will immediately divide the pending wcro for everybody by 2
@@ -154,6 +234,14 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
 
     function _revokeAllowances() internal {
         IERC20(wcro).approve(router, 0);
+    }
+
+    function addToBlacklist(address _address) external onlyOwner {
+        blacklisted[_address] = true;
+    }
+
+    function removeFromBlacklist(address _address) external onlyOwner {
+        delete blacklisted[_address];
     }
 
     // Amend the router is delayed by 7 days to avoid any abuse of authority
@@ -191,4 +279,5 @@ contract CroblancDividends is ERC20, Ownable, ReentrancyGuard {
         // Alert everybody
         emit NewRouterDeployed(newRouter.newAddress);
     }
+
 }
