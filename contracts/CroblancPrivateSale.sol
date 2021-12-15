@@ -53,7 +53,6 @@ contract CroblancPrivateSale is Ownable {
 
     event Participate(address indexed user, uint256 amountUsdc, uint256 amountCroblanc);
 
-    mapping (address => bool) public whitelist;
     mapping (address => Allocation) public allocations;
 
     modifier onlyValidAccess(uint8 _v, bytes32 _r, bytes32 _s) {
