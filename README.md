@@ -22,10 +22,9 @@ Furthermore, to keep all our users safe, Farms contracts will be entirely disclo
 | CroblancToken | [`0xD3ceCBE5639D05Aed446Da11F08D495CA6bF359F`](https://cronos.crypto.org/explorer/address/0xD3ceCBE5639D05Aed446Da11F08D495CA6bF359F) |
 | CroblancTreasury | [`0xb20234c33337537111f4ab6f5EcaD400134aC143`](https://cronos.crypto.org/explorer/address/0xb20234c33337537111f4ab6f5EcaD400134aC143) |
 | CroblancTimelock | [`0x47eC5085c8D544a42Baf966ee97cC54a7503b996`](https://cronos.crypto.org/explorer/address/0x47eC5085c8D544a42Baf966ee97cC54a7503b996) |
-| CroblancDividends (deprecated) | [`0x7727D82c8e9881b3D459CE0D5B87D2132A9915A4`](https://cronos.crypto.org/explorer/address/0x7727D82c8e9881b3D459CE0D5B87D2132A9915A4) |
 | CroblancDividends | [`0x20f2F2eb16fDca2fA53EaDc8A471a3F19E5923CA`](https://cronos.crypto.org/explorer/address/0x20f2F2eb16fDca2fA53EaDc8A471a3F19E5923CA) |
-| CroblancPrivateSale | [`0xBbd00fd287973345768F4EB5a46f3b4A91E55347`](https://cronos.crypto.org/explorer/address/0xBbd00fd287973345768F4EB5a46f3b4A91E55347) |
-| CroblancPublicSale | [`0x569d9bCf63Cb0a81c777181B7C079a2C515fD372`](https://cronos.crypto.org/explorer/address/0x569d9bCf63Cb0a81c777181B7C079a2C515fD372) |
+| CroblancPrivateSale | [`0x687Ffc1327dB761791d7A7fE8e4310004292E0a1`](https://cronos.crypto.org/explorer/address/0x687Ffc1327dB761791d7A7fE8e4310004292E0a1) |
+| CroblancPublicSale | [`0x2615cB937901F904A4f550E30fD010EdCD8F0420`](https://cronos.crypto.org/explorer/address/0x2615cB937901F904A4f550E30fD010EdCD8F0420) |
 
 ### Testnet
 
