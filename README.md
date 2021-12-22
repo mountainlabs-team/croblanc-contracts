@@ -25,12 +25,14 @@ Furthermore, to keep all our users safe, Farms contracts will be entirely disclo
 | CroblancDividends | [`0x20f2F2eb16fDca2fA53EaDc8A471a3F19E5923CA`](https://cronos.crypto.org/explorer/address/0x20f2F2eb16fDca2fA53EaDc8A471a3F19E5923CA) |
 | CroblancPrivateSale | [`0x687Ffc1327dB761791d7A7fE8e4310004292E0a1`](https://cronos.crypto.org/explorer/address/0x687Ffc1327dB761791d7A7fE8e4310004292E0a1) |
 | CroblancPublicSale | [`0x2615cB937901F904A4f550E30fD010EdCD8F0420`](https://cronos.crypto.org/explorer/address/0x2615cB937901F904A4f550E30fD010EdCD8F0420) |
+| CroblancAlpha | [`0x52a87ef19e4a0E8cc70aE69D22bc8254bc6fa0F9`](https://cronos.crypto.org/explorer/address/0x52a87ef19e4a0E8cc70aE69D22bc8254bc6fa0F9) |
+| WCRO-CROBLANC (Cronaswap) | [`0x4c1EC4Bf75CdFAF9b172e94cc85b7a8eA647F267`](https://cronos.crypto.org/explorer/address/0x4c1EC4Bf75CdFAF9b172e94cc85b7a8eA647F267) |
+| USDC-USDT (Cronaswap) | [`0xf654280AbBEaed6192AEA26d422487b0AD666Fce`](https://cronos.crypto.org/explorer/address/0xf654280AbBEaed6192AEA26d422487b0AD666Fce) |
+| WCRO-CRONA (Cronaswap) | [`0x267f568Cfd7035E801509CeE19A7FEb2c62f62f3`](https://cronos.crypto.org/explorer/address/0x267f568Cfd7035E801509CeE19A7FEb2c62f62f3) |
+| USDT-BUSD (Cronaswap) | [`0x7d53Ad113BEE7163Ea2B14A50fC98F2E246b5079`](https://cronos.crypto.org/explorer/address/0x7d53Ad113BEE7163Ea2B14A50fC98F2E246b5079) |
+| WETH-WBTC (Cronaswap) | [`0x7F0E67768c122DA76b4438f7a7fABfD834bDBa2C`](https://cronos.crypto.org/explorer/address/0x7F0E67768c122DA76b4438f7a7fABfD834bDBa2C) |
 
-### Testnet
-
-A public testnet is currently running on https://dev.croblanc.com/
-
-Feel free to contribute! It helps to build a better product.
+More to come
 
 ### Join the community
 
