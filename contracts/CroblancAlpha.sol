@@ -32,7 +32,7 @@ contract CroblancAlpha is Ownable, Pausable {
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
 
-    // Info of each farm. To save gas, default or disabled values are zeroed.
+    // Info of each farm
     struct farmInfo {
         bool registered;
         bool farmingEnabled;
@@ -59,7 +59,7 @@ contract CroblancAlpha is Ownable, Pausable {
     // Inflation control, times 100. >100: is a multiplier, <100: is a divider. Capped to 10000 (100 times 100) or 20000 during full moons
     uint256 public emissionMultiplier;
 
-    // Performance fee charged per thousand, hard capped to 200 (20%)
+    // Performance fee charged per thousand, hard capped to 250 (25%)
     uint256 public performanceFeePerThousand;
 
     // Sum of allocation points of all farms
@@ -79,8 +79,8 @@ contract CroblancAlpha is Ownable, Pausable {
     ) public {
         treasury = _treasury;
         dividends = _dividends;
-        setCroblancPerSecond(_croblancPerSecond);
-        setEmissionMultiplier(_emissionMultiplier);
+        setCroblancPerSecond(_croblancPerSecond, true);
+        setEmissionMultiplier(_emissionMultiplier, true);
         performanceFeePerThousand = _performanceFeePerThousand;
     }
 
@@ -106,7 +106,7 @@ contract CroblancAlpha is Ownable, Pausable {
     }
 
     function isFullMoon() public view returns (bool) {
-        // Data until end of 2025, after that there will be no moon boost anymore.
+        // Data until end of 2025, after that there will be no moon boost over >100x multiplier anymore.
         uint32[50] memory fullMoonDays = [
             1639785600, 1642377600, 1644969600, 1647561600, 1650067200, 1652572800, 1655164800, 1657670400, 1660176000,
             1662768000, 1665273600, 1667865600, 1670371200, 1672963200, 1675555200, 1678147200, 1680652800, 1683244800,
@@ -210,24 +210,29 @@ contract CroblancAlpha is Ownable, Pausable {
         amendAllocationPoints(_farm, _allocationPoints);
     }
 
-    function massUpdateFarms() internal {
-        // Beware of gas exhaustion, if we are over gas limit we must disable some farms first
-        for (uint256 i = 0; i < farms.length; i++) {
+    function _massUpdateFarms(uint256 _from, uint256 _to) internal {
+        // Beware of gas exhaustion, if we are over gas limit we must disable some farms first or call two or more
+        // transactions with a part of the range.
+        for (uint256 i = _from; i < _to; i++) {
             if (farmInfos[farms[i]].farmingEnabled) {
                 ICroblancFarm(farms[i]).updatePool(false);
             }
         }
     }
 
-    function setCroblancPerSecond(uint256 _croblancPerSecond) public onlyOwner {
+    function setCroblancPerSecond(uint256 _croblancPerSecond, bool _updateFarms) public onlyOwner {
         // maximum base speed: 0.031709791983764590 CROBLANC / sec
         // maximum multiplier: 100
         //             equals: 3.1709791983764590 CROBLANC / sec
         //                     = 273972.6027397260576 CROBLANC / day
         //                     = 100M CROBLANC / 1 year
-        require(_croblancPerSecond <= 31709791983764590);
+        require(_croblancPerSecond <= 31709791983764590, "Over hard cap");
+
         // Harvest one last time before updating the farming settings
-        massUpdateFarms();
+        if (_updateFarms) {
+            _massUpdateFarms(0, farms.length);
+        }
+
         // Update the emission
         croblancPerSecond = _croblancPerSecond;
     }
@@ -284,9 +289,9 @@ contract CroblancAlpha is Ownable, Pausable {
         emit NewDividendsDeployed(newDividends.newAddress);
     }
 
-    function setEmissionMultiplier(uint256 _emissionMultiplier) public onlyOwner {
+    function setEmissionMultiplier(uint256 _emissionMultiplier, bool _updateFarms) public onlyOwner {
         // Maximum of x200 (during full moon)
-        require(_emissionMultiplier <= 20000);
+        require(_emissionMultiplier <= 20000, "Too high");
 
         if (!isFullMoon()) {
             // After full, maximum will is capped to x100
@@ -294,19 +299,27 @@ contract CroblancAlpha is Ownable, Pausable {
             // Potential abuse of authority: if Owner doesn't lower the emissionMultiplier after the full moon ends, a
             // x200 multiplier may run longer than expected. We do not want the users to pay gas for massUpdateFarms,
             // so we will handle this with cron jobs and do our best to keep a full moon booster duration around 24h.
-            require(_emissionMultiplier <= 10000);
+            require(_emissionMultiplier <= 10000, "Not full moon");
         }
 
-        // Harvest one last time before updating the farming settings
-        massUpdateFarms();
+        // Supposed to be always true. Just keep the option in cause we have an out of gas and let the admin update
+        // the pools manually
+        if (_updateFarms) {
+            // Harvest one last time before updating the farming settings
+            _massUpdateFarms(0, farms.length);
+        }
 
         // Update the multiplier
         emissionMultiplier = _emissionMultiplier;
     }
 
+    function massUpdateFarmsPartly(uint256 _from, uint256 _to) external onlyOwner {
+        _massUpdateFarms(_from, _to);
+    }
+
     function setPerformanceFeePerThousand(uint256 _performanceFeePerThousand) public onlyOwner {
-        // Hard cap of 20% to prevent any abuse of authority.
-        require(_performanceFeePerThousand <= 200);
+        // Hard cap of 25% to prevent any abuse of authority.
+        require(_performanceFeePerThousand <= 250);
 
         performanceFeePerThousand = _performanceFeePerThousand;
     }
