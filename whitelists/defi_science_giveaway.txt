@@ -52,7 +52,7 @@ Remaining participants:
 [4] 0x500b9002430aa941060c9b1b6423fbf6208f7b50
 [5] 0x9c070001b0e0633dcf6d842b33c4b9b9af59701d
 [6] 0xa8a0d398a05523fb5271b9970e5d0b280f12e098
-[7] 0xdd3fb1acb6d176852e70aa736e9ef11ec6d2b251
+[7] 0xe4611ead167dcf3aa72acb9dc24e5a0acb4e6de4
 
 Block: 678002
 Last 4 digits of hash (hex): ee88
@@ -67,13 +67,13 @@ Remaining participants:
 [3] 0x456194909ec3ad3a753f273ca56dc2061654baaa
 [4] 0x9c070001b0e0633dcf6d842b33c4b9b9af59701d
 [5] 0xa8a0d398a05523fb5271b9970e5d0b280f12e098
-[6] 0xdd3fb1acb6d176852e70aa736e9ef11ec6d2b251
+[6] 0xe4611ead167dcf3aa72acb9dc24e5a0acb4e6de4
 
 Block: 678003
 Last 4 digits of hash (hex): 3e57
 Converted in dec: 15959
 Result: ((15959 % 6) + 1) = 6
-0xdd3fb1acb6d176852e70aa736e9ef11ec6d2b251 win 100 USDC!
+0xe4611ead167dcf3aa72acb9dc24e5a0acb4e6de4 win 100 USDC!
 
 # ----------------- ROUND 5 -----------------
 Remaining participants:
