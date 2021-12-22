@@ -1,0 +1,90 @@
+# Participants who replied the correct answers:
+0x05b84293f5167b068a9d98370741ccc380181956
+0x3293ad4ac74e86a978a3b40ca5e2f94874edd509
+0x456194909ec3ad3a753f273ca56dc2061654baaa
+0x500b9002430aa941060c9b1b6423fbf6208f7b50
+0x9bb6d1c28b1b01e4b3a5821b91a3a0af0b92f68a
+0x9c070001b0e0633dcf6d842b33c4b9b9af59701d
+0xa8a0d398a05523fb5271b9970e5d0b280f12e098
+0xdd3fb1acb6d176852e70aa736e9ef11ec6d2b251
+0xe4611ead167dcf3aa72acb9dc24e5a0acb4e6de4
+
+# ----------------- ROUND 1 -----------------
+Remaining participants:
+[1] 0x05b84293f5167b068a9d98370741ccc380181956
+[2] 0x3293ad4ac74e86a978a3b40ca5e2f94874edd509
+[3] 0x456194909ec3ad3a753f273ca56dc2061654baaa
+[4] 0x500b9002430aa941060c9b1b6423fbf6208f7b50
+[5] 0x9bb6d1c28b1b01e4b3a5821b91a3a0af0b92f68a
+[6] 0x9c070001b0e0633dcf6d842b33c4b9b9af59701d
+[7] 0xa8a0d398a05523fb5271b9970e5d0b280f12e098
+[8] 0xdd3fb1acb6d176852e70aa736e9ef11ec6d2b251
+[9] 0xe4611ead167dcf3aa72acb9dc24e5a0acb4e6de4
+
+Block: 678000
+Last 4 digits of hash (hex): xxxx
+Converted in dec:            xxxx
+Result: ((xxx % 9) + 1) = x
+[address] win 100 USDC!
+
+# ----------------- ROUND 2 -----------------
+Remaining participants:
+[1] 
+[2] 
+[3] 
+[4] 
+[5] 
+[6] 
+[7] 
+[8] 
+
+Block: 678001
+Last 4 digits of hash (hex): xxxx
+Converted in dec:            xxxx
+Result: ((xxx % 8) + 1) = x
+[address] win 100 USDC!
+
+# ----------------- ROUND 3 -----------------
+Remaining participants:
+[1] 
+[2] 
+[3] 
+[4] 
+[5] 
+[6] 
+[7] 
+
+Block: 678002
+Last 4 digits of hash (hex): xxxx
+Converted in dec:            xxxx
+Result: ((xxx % 7) + 1) = x
+[address] win 100 USDC!
+
+# ----------------- ROUND 4 -----------------
+Remaining participants:
+[1] 
+[2] 
+[3] 
+[4] 
+[5] 
+[6] 
+
+Block: 678003
+Last 4 digits of hash (hex): xxxx
+Converted in dec:            xxxx
+Result: ((xxx % 6) + 1) = x
+[address] win 100 USDC!
+
+# ----------------- ROUND 5 -----------------
+Remaining participants:
+[1] 
+[2] 
+[3] 
+[4] 
+[5] 
+
+Block: 678004
+Last 4 digits of hash (hex): xxxx
+Converted in dec:            xxxx
+Result: ((xxx % 5) + 1) = x
+[address] win 100 USDC!
